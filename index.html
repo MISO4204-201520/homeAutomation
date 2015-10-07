@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+		<link href="assets/css/estilo.css" rel="stylesheet" />
+		<title>Casa Inteligente</title>
+	</head>
+	<body>
+
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+		  <div class="container">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="#">Casa Inteligente</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+			  <ul class="nav navbar-nav">
+				<li><a href="#about">About</a></li>
+				<li><a href="#contact">Contact</a></li>
+			  </ul>
+			</div><!--/.nav-collapse -->
+		  </div>
+		</nav>
+
+		<div class="container casa" ng-app="myApp" ng-controller="HomeController">
+			<h1>{{name}}</h1>
+			<hr />
+			<div class="row">
+				<div class="col-md-3">
+					<h2>Pisos:</h2>
+					<ul class="list-group" data-toggle="tooltip" data-placement="right" title="Empieza seleccionando un piso">
+						<li ng-repeat="x in pisos" class="list-group-item pisoLista" ng-click="verPiso(x.id)">
+							{{ x.id }}
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-9" id="pisoView" style="display: none;">
+					<h2>Piso #{{pisoActual}}</h2>
+					<div id="distribucionPisos">
+						<div class="row">
+							<div class="col-md-6 piso" id="c1">
+								<div class="row casillasPiso">
+									<div class="col-md-3" id="c1i1">
+									</div>
+									<div class="col-md-3" id="c1i2">
+									</div>
+									<div class="col-md-3" id="c1i3">
+									</div>
+									<div class="col-md-3" id="c1i4">
+									</div>
+								</div>
+								<div class="row casillasPiso">
+									<div class="col-md-3" id="c1i5">
+									</div>
+									<div class="col-md-3" id="c1i6">
+									</div>
+									<div class="col-md-3" id="c1i7">
+									</div>
+									<div class="col-md-3" id="c1i8">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 piso" id="c2">
+								<div class="row casillasPiso">
+									<div class="col-md-3" id="c2i1">
+									</div>
+									<div class="col-md-3" id="c2i2">
+									</div>
+									<div class="col-md-3" id="c2i3">
+									</div>
+									<div class="col-md-3" id="c2i4">
+									</div>
+								</div>
+								<div class="row casillasPiso">
+									<div class="col-md-3" id="c2i5">
+									</div>
+									<div class="col-md-3" id="c2i6">
+									</div>
+									<div class="col-md-3" id="c2i7">
+									</div>
+									<div class="col-md-3" id="c2i8">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 piso" id="c3">
+								<div class="row casillasPiso">
+									<div class="col-md-3" id="c3i1">
+									</div>
+									<div class="col-md-3" id="c3i2">
+									</div>
+									<div class="col-md-3" id="c3i3">
+									</div>
+									<div class="col-md-3" id="c3i4">
+									</div>
+								</div>
+								<div class="row casillasPiso">
+									<div class="col-md-3" id="c3i5">
+									</div>
+									<div class="col-md-3" id="c3i6">
+									</div>
+									<div class="col-md-3" id="c3i7">
+									</div>
+									<div class="col-md-3" id="c3i8">
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 piso" id="c4">
+								<div class="row casillasPiso">
+									<div class="col-md-3" id="c4i1">
+									</div>
+									<div class="col-md-3" id="c4i2">
+									</div>
+									<div class="col-md-3" id="c4i3">
+									</div>
+									<div class="col-md-3" id="c4i4">
+									</div>
+								</div>
+								<div class="row casillasPiso">
+									<div class="col-md-3" id="c4i5">
+									</div>
+									<div class="col-md-3" id="c4i6">
+									</div>
+									<div class="col-md-3" id="c4i7">
+									</div>
+									<div class="col-md-3" id="c4i8">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.container -->
+		
+		<div class="container">
+			<div class="row">
+				<hr />
+				Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>, <a href="http://www.flaticon.com/authors/plainicon" title="Plainicon">Plainicon</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+		var defaultContent = document.getElementById('distribucionPisos').innerHTML;
+		var app = angular.module('myApp', []);
+		app.controller('HomeController', function($scope, $http) {
+			// Aqui se lee el json y se asignan en scope los valores obtenidos
+			$http.get("instanciaEsquemaAvanzado.json").success(function (response) {
+				$scope.name = response.id;
+				$scope.pisos = response.pisos;
+				$scope.sensores = response.sensores;
+				$scope.activadores = response.activadores;
+				$scope.pisoActual = response.pisoActual;
+				$scope.numPisos = response.pisos.length;
+			});
+			
+			// Esta es la funcion que se ejecuta cada vez que se selecciona un piso
+			$scope.verPiso = function(pisoId) {
+				
+				// Primero se destruyen los tooltips existentes (incluyendo el que indica la seleccion de un piso)
+				$('[data-toggle="tooltip"]').tooltip('destroy');
+				
+				// Se reinicia el contenido del <div> que muestra la distribucion de los pisos
+				document.getElementById('pisoView').style.display = '';
+				document.getElementById('distribucionPisos').innerHTML = defaultContent;
+				
+				// Tenemos un flag que nos ayuda a identificar si el piso seleccionado existe
+				var encontrado = false;
+				for (var i = 0; i < $scope.numPisos && !encontrado; i++)
+				{
+					// Si encontro el piso...
+					if ($scope.pisos[i].id == pisoId)
+					{
+						// Cambie nuestro flag y asigne algunas variables
+						encontrado = true;
+						var elPiso = $scope.pisos[i];
+						$scope.pisoActual = elPiso.id;
+						
+						// Ahora deben mostrarse cada uno de los cuartos que tenga este piso
+						for (var c = 0; c < elPiso.cuartos.length; c++)
+						{
+							// Se crean algunas variables, posicionEnCuarto nos ayuda a llevar los bloques de cada piso
+							var elCuarto = elPiso.cuartos[c];
+							var posicionEnCuarto = 1;
+							
+							// El el div con id=c(CONTADOR) se pone el nombre del cuarto
+							document.getElementById('c' + (c+1)).innerHTML = '<h4>' + elCuarto.nombre + ':</h4>' + document.getElementById('c' + (c+1)).innerHTML;
+							
+							// Ahora vamos por todos los sensores...
+							for (var s = 0; s < $scope.sensores.length; s++)
+							{
+								// Si el sensor se encuentra en este cuarto debemos pintarlo
+								var sensor = $scope.sensores[s];
+								if (sensor.cuarto == elCuarto.id)
+								{
+									// La parte superior del sensor va a desplegar informacion segun el tipo del sensor
+									var parteSuperior = (sensor.encendido ? '<span class="on">ON</span>' : '<span class="off">OFF</span>');
+									if (sensor.tipo == 'sensorMovimiento' || sensor.tipo == 'sensorHumo')
+									{
+										parteSuperior += (sensor.alarmando ? '<img src="assets/imagenes/alert.png" alt="" data-toggle="tooltip" data-placement="top" title="El sensor se encuentra alarmando" class="blink alert_icon" />' : '');
+									}
+									else if (sensor.tipo == 'termostato')
+									{
+										parteSuperior += ' (' + sensor.temperatura + ' &deg;C)';
+									}
+									
+									// Finalmente se pone la parte superior en un bloque del cuarto y se agrega un icono representativo
+									document.getElementById('c' + (c+1) + 'i' + posicionEnCuarto).innerHTML += '<div class="parte_superior_sensor" align="center">' + parteSuperior + '</div><div align="center"><img src="assets/imagenes/' + sensor.tipo + '.png" alt="' + sensor.id + '" data-toggle="tooltip" data-placement="bottom" title="' + sensor.id + '" /></div>';
+									posicionEnCuarto++;
+								}
+							}
+							
+							// Ahora se recorren los activadores!
+							for (var s = 0; s < $scope.activadores.length; s++)
+							{
+								// Si el activador pertenece al cuarto en cuestion, debemos pintarlo
+								var activador = $scope.activadores[s];
+								if (activador.cuarto == elCuarto.id)
+								{
+									// La parte superior del activador va a desplegar informacion segun el tipo del activador, mientras que el sufijo de la imagen nos ayuda a mostrar el estado.
+									var parteSuperior = sufijoImagen = '';
+									// Podemos animar las imagenes cambiandoles la extension a .gif para algunos activadores
+									var extImagen = 'png';
+									if (activador.tipo == 'accesoCodigo' || activador.tipo == 'accesoHuella')
+									{
+										parteSuperior += (activador.bloqueado ? '<img src="assets/imagenes/lock.png" alt="" data-toggle="tooltip" data-placement="top" title="El activador se encuentra bloqueado" class="lock_icon" />' : '');
+									}
+									else if (activador.tipo == 'lampara' || activador.tipo == 'bombillo')
+									{
+										parteSuperior += ' (Nivel: ' + activador.intensidad + ')';
+										sufijoImagen = (activador.encendido ? 'On' : 'Off');
+									}
+									else if (activador.tipo == 'ventilador')
+									{
+										parteSuperior += ' (Vel: ' + activador.velocidad + ')';
+										sufijoImagen = (activador.encendido ? 'On' : 'Off');
+										//extImagen = 'gif';
+									}
+									else if (activador.tipo == 'ventana')
+									{
+										parteSuperior += (activador.abierta ? '<span class="on">Abierta</span>' : '<span class="off">Cerrada</span>') + (activador.bloqueado ? '<img src="assets/imagenes/lock.png" alt="" data-toggle="tooltip" data-placement="top" title="El activador se encuentra bloqueado" class="lock_icon" />' : '');
+										sufijoImagen = (activador.abierta ? 'On' : 'Off');
+									}
+									else if (activador.tipo == 'televisor')
+									{
+										parteSuperior += (activador.encendido ? '<span class="on">ON</span>' : '<span class="off">OFF</span>');
+										sufijoImagen = (activador.encendido ? 'On' : 'Off');
+									}
+									else if (activador.tipo == 'equipoDeSonido')
+									{
+										parteSuperior += 'Vol: ' + activador.volumen;
+										sufijoImagen = (activador.encendido ? 'On' : 'Off');
+									}
+									
+									document.getElementById('c' + (c+1) + 'i' + posicionEnCuarto).innerHTML += '<div class="parte_superior_activador" align="center">' + parteSuperior + '</div><div align="center"><img src="assets/imagenes/' + activador.tipo + sufijoImagen + '.' + extImagen + '" alt="' + activador.id + '" data-toggle="tooltip" data-placement="bottom" title="' + activador.id + '" /></div>';
+									posicionEnCuarto++;
+								}
+							}
+						}
+					}
+				}
+				
+				// Sino encontro el piso, debe avisar!
+				if (!encontrado)
+					alert('El piso buscado no fue encontrado.');
+			
+				// Se inicializan los nuevos tooltips
+				$('[data-toggle="tooltip"]').tooltip();
+			};
+			
+			// Este carga a los tooltip que se muestran al inicio
+			$(function () {
+			  $('[data-toggle="tooltip"]').tooltip('show');
+			});
+		});
+		</script>
+		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+	</body>
+</html>
