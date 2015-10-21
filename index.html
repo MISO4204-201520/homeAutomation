@@ -28,7 +28,7 @@
 		  </div>
 		</nav>
 
-		<div class="container casa" ng-app="myApp" ng-controller="HomeController">
+		<div class="container casa" ng-app="myApp" ng-controller="HomeController" id="HomeController">
 			<h1>{{name}}</h1>
 			<hr />
 			<div class="row">
@@ -150,16 +150,21 @@
 		<script type="text/javascript">
 		var defaultContent = document.getElementById('distribucionPisos').innerHTML;
 		var app = angular.module('myApp', []);
-		app.controller('HomeController', function($scope, $http) {
+		var pisoActual = 0;
+		app.controller('HomeController', function($scope, $timeout, $http) {
 			// Aqui se lee el json y se asignan en scope los valores obtenidos
-			$http.get("instanciaEsquemaAvanzado.json").success(function (response) {
-				$scope.name = response.id;
-				$scope.pisos = response.pisos;
-				$scope.sensores = response.sensores;
-				$scope.activadores = response.activadores;
-				$scope.pisoActual = response.pisoActual;
-				$scope.numPisos = response.pisos.length;
-			});
+			$scope.obtenerJson = function(pisoId) {
+				$http.get("instanciaEsquemaAvanzado.json").success(function (response) {
+					$scope.name = response.id;
+					$scope.pisos = response.pisos;
+					$scope.sensores = response.sensores;
+					$scope.activadores = response.activadores;
+					$scope.pisoActual = response.pisoActual;
+					$scope.numPisos = response.pisos.length;
+					console.log($scope);
+				});
+
+			}; 
 			
 			// Esta es la funcion que se ejecuta cada vez que se selecciona un piso
 			$scope.verPiso = function(pisoId) {
@@ -182,6 +187,7 @@
 						encontrado = true;
 						var elPiso = $scope.pisos[i];
 						$scope.pisoActual = elPiso.id;
+						pisoActual = elPiso.id;
 						
 						// Ahora deben mostrarse cada uno de los cuartos que tenga este piso
 						for (var c = 0; c < elPiso.cuartos.length; c++)
@@ -275,9 +281,24 @@
 				$('[data-toggle="tooltip"]').tooltip();
 			};
 			
-			// Este carga a los tooltip que se muestran al inicio
+			// Esta es la funcion que se ejecuta cada vez que se selecciona un piso
+			$scope.timeoutFunction = function() {
+				$timeout(function() {
+					$scope.obtenerJson();
+				  
+					if (pisoActual != 0)
+						$scope.verPiso(pisoActual);
+				  
+					$scope.timeoutFunction();
+				}, 10000)
+			};
+			
+			$scope.obtenerJson();
+			$scope.timeoutFunction();
+			
+			// Este los tooltip que se muestran al inicio
 			$(function () {
-			  $('[data-toggle="tooltip"]').tooltip('show');
+				$('[data-toggle="tooltip"]').tooltip('show');
 			});
 		});
 		</script>

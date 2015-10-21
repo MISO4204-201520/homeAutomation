@@ -74,7 +74,7 @@
             "cuarto": 4,
 			"tipo": "sensorMovimiento",
             "encendido": true,
-            "alarmando": false
+            "alarmando": true
         }
     ],
     "activadores": [
