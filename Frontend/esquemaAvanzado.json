@@ -1,0 +1,389 @@
+{
+    "$schema": "http://miso.uniandes.edu.co/homeAutomation/schema",
+    "title": "Home Automation",
+    "description": "Representa una casa inteligente",
+    "type": "object",
+    "properties": {
+	    "id": {
+	        "description": "El identificador unico de la casa",
+	        "type": "string",
+	        "minimum": 0,
+	        "exclusiveMinimum": true
+	    },
+	    "pisos": {
+	        "title": "Pisos",
+	        "type": "array",
+	        "items": {
+	        	"title": "Piso",
+        		"type": "object",
+		        "properties": {
+		            "id": {
+		                "description": "El identificador único del piso",
+		                "type": "number"
+		            },
+		            "cuartos": {
+		            	"type": "array",
+		            	"title": "Cuartos",
+		            	"items": {
+					        "title": "Cuarto",
+					        "type": "object",
+				            "properties": {
+					            "id": {
+					                "description": "El identificador único del cuarto",
+					                "type": "number"
+					            },
+					            "nombre": {
+					                "type": "string"
+					            },
+					           	"tipo": {
+					            	"description": "El tipo del cuarto, como comedor o alcohoba",
+					                "type": "string"
+					            }
+					            
+					        },
+					        "required": ["id", "nombre", "tipo"]
+					    } 
+		            }
+		        },
+		        "required": ["id", "cuartos"]
+	        }
+	    },
+	    "sensores": {
+	    	"title": "Sensores",
+	        "type": "array",
+	        "items": {
+		        "title": "Sensor",
+		        "type": "object",
+	            "anyOf": [
+	                { "$ref": "#/definitions/termostato" },
+	                { "$ref": "#/definitions/sensorDeHumo" },
+	                { "$ref": "#/definitions/sensorDeMovimiento" }
+	            ]
+		    } 
+	    },
+	    "activadores": {
+	    	"title": "Activadores",
+	        "type": "array",
+	        "items": {
+		        "title": "Activador",
+		        "type": "object",
+	            "anyOf": [
+	                { "$ref": "#/definitions/accesoCodigo" },
+	                { "$ref": "#/definitions/accesoHuella" },
+	                { "$ref": "#/definitions/lampara" },
+	                { "$ref": "#/definitions/bombillo" },
+	                { "$ref": "#/definitions/ventilador" },
+	                { "$ref": "#/definitions/ventana" },
+	                { "$ref": "#/definitions/televisor" },
+	                { "$ref": "#/definitions/equipoDeSonido" }
+	            ]
+		    }
+		}
+	},
+	"required": ["id", "pisos", "sensores", "activadores"],
+	"definitions": {
+        "termostato": {
+            "type": "object",
+            "properties": {
+            	"id": {
+	                "description": "El identificador único del termostato",
+	                "type": "string"
+	            },
+	            "cuarto": {
+	            	"description": "El identificador del cuarto donde se encuentra el termostato",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": true
+	            },
+	            "tipo": {
+	            	"description": "Indica el tipo del sensor.",
+	            	"enum": [ "termostato" ]
+	            },
+	            "encendido": {
+	            	"description": "Indica si se encuentra en funcionamiento.",
+	                "type": "boolean"
+	            },
+	            "temperatura": {
+	            	"description": "Define la temperatura del termostato.",
+	                "type": "integer"
+	            }
+            },
+            "required": ["id", "cuarto", "tipo", "encendido", "temperatura"]
+        },
+        "sensorDeHumo": {
+            "type": "object",
+            "properties": {
+            	"id": {
+	                "description": "El identificador único del sensor de humo",
+	                "type": "string"
+	            },
+	            "cuarto": {
+	            	"description": "El identificador del cuarto donde se encuentra el sensor",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": true
+	            },
+	            "tipo": {
+	            	"description": "Indica el tipo del sensor.",
+	            	"enum": [ "sensorHumo" ]
+	            },
+	            "encendido": {
+	            	"description": "Indica si se encuentra en funcionamiento.",
+	                "type": "boolean"
+	            },
+	            "alarmando": {
+	            	"description": "Indica si el sensor esta detectando humo.",
+	                "type": "boolean"
+	            }
+            }
+        },
+        "sensorDeMovimiento": {
+            "type": "object",
+            "properties": {
+            	"id": {
+	                "description": "El identificador único del sensor de movimiento",
+	                "type": "string"
+	            },
+	            "cuarto": {
+	            	"description": "El identificador del cuarto donde se encuentra el sensor de movimiento",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": true
+	            },
+	            "tipo": {
+	            	"description": "Indica el tipo del sensor.",
+	            	"enum": [ "sensorMovimiento" ]
+	            },
+	            "encendido": {
+	            	"description": "Indica si se encuentra en funcionamiento.",
+	                "type": "boolean"
+	            },
+	            "alarmando": {
+	            	"description": "Define si el sensor se encuentra detectando movimiento.",
+	                "type": "integer"
+	            }
+            }
+        },
+        "accesoCodigo": {
+            "type": "object",
+            "properties": {
+	            "id": {
+	                "description": "El identificador único del activador",
+	                "type": "string"
+	            },
+	            "cuarto": {
+	            	"description": "El identificador del cuarto donde se encuentra el activador",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": true
+	            },
+	            "tipo": {
+	            	"description": "Indica el tipo del activador.",
+	            	"enum": [ "accesoCodigo" ]
+	            },
+	            "cuartoAdyacente": {
+	            	"description": "El identificador del cuarto a donde lleva el acceso, 0 para afuera",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": false
+	            },
+	            "codigoAcceso": {
+	            	"description": "El codigo para ingresar o salir por medio de este acceso.",
+	                "type": "string"
+	            },
+				"bloqueado": {
+	            	"description": "Indica si el sensor bloquea las entradas y salidas.",
+	                "type": "boolean"
+	            }
+	        },
+	        "required": ["id", "cuarto", "codigoAcceso"]
+        },
+        "accesoHuella": {
+            "type": "object",
+            "properties": {
+            	"id": {
+	                "description": "El identificador único del activador",
+	                "type": "string"
+	            },
+	            "cuarto": {
+	            	"description": "El identificador del cuarto donde se encuentra el activador",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": true
+	            },
+	            "tipo": {
+	            	"description": "Indica el tipo del activador.",
+	            	"enum": [ "accesoHuella" ]
+	            },
+	            "cuartoAdyacente": {
+	            	"description": "El identificador del cuarto a donde lleva el acceso, 0 para afuera",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": false
+	            },
+	            "bloqueado": {
+	            	"description": "Indica si el sensor bloquea las entradas y salidas.",
+	                "type": "boolean"
+	            }
+            }
+        },
+        "lampara": {
+            "type": "object",
+            "properties": {
+            	"id": {
+	                "description": "El identificador único del activador",
+	                "type": "string"
+	            },
+	            "cuarto": {
+	            	"description": "El identificador del cuarto donde se encuentra el activador",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": true
+	            },
+	            "tipo": {
+	            	"description": "Indica el tipo del activador.",
+	            	"enum": [ "lampara" ]
+	            },
+	            "encendido": {
+	            	"description": "Indica si se encuentra en funcionamiento.",
+	                "type": "boolean"
+	            },
+	            "intensidad": {
+	            	"description": "Indica la intensidad de la luz.",
+	                "type": "integer"
+	            }
+            }
+        },
+        "bombillo": {
+            "type": "object",
+            "properties": {
+            	"id": {
+	                "description": "El identificador único del activador",
+	                "type": "string"
+	            },
+	            "cuarto": {
+	            	"description": "El identificador del cuarto donde se encuentra el activador",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": true
+	            },
+	            "tipo": {
+	            	"description": "Indica el tipo del activador.",
+	            	"enum": [ "bombillo" ]
+	            },
+	            "encendido": {
+	            	"description": "Indica si se encuentra encendido.",
+	                "type": "boolean"
+	            },
+	            "intensidad": {
+	            	"description": "Indica la intensidad de la luz.",
+	                "type": "integer"
+	            }
+            }
+        },
+        "ventilador": {
+            "type": "object",
+            "properties": {
+            	"id": {
+	                "description": "El identificador único del activador",
+	                "type": "string"
+	            },
+	            "cuarto": {
+	            	"description": "El identificador del cuarto donde se encuentra el activador",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": true
+	            },
+	            "tipo": {
+	            	"description": "Indica el tipo del activador.",
+	            	"enum": [ "ventilador" ]
+	            },
+	            "encendido": {
+	            	"description": "Indica si se encuentra encendido.",
+	                "type": "boolean"
+	            },
+	            "velocidad": {
+	            	"description": "Indica la velocidad en la que se encuentra el ventilador.",
+	                "type": "integer"
+	            }
+            }
+        },
+        "ventana": {
+            "type": "object",
+            "properties": {
+            	"id": {
+	                "description": "El identificador único del activador",
+	                "type": "string"
+	            },
+	            "cuarto": {
+	            	"description": "El identificador del cuarto donde se encuentra el activador",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": true
+	            },
+	            "tipo": {
+	            	"description": "Indica el tipo del activador.",
+	            	"enum": [ "ventana" ]
+	            },
+	            "abierta": {
+	            	"description": "Indica si la ventana se encuentra abierta.",
+	                "type": "boolean"
+	            },
+	            "bloqueado": {
+	            	"description": "Indica la ventana se encuentra bloqueada.",
+	                "type": "boolean"
+	            }
+            }
+        },
+        "televisor": {
+            "type": "object",
+            "properties": {
+            	"id": {
+	                "description": "El identificador único del activador",
+	                "type": "string"
+	            },
+	            "cuarto": {
+	            	"description": "El identificador del cuarto donde se encuentra el activador",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": true
+	            },
+	            "tipo": {
+	            	"description": "Indica el tipo del activador.",
+	            	"enum": [ "televisor" ]
+	            },
+	            "encendido": {
+	            	"description": "Indica si se encuentra en funcionamiento.",
+	                "type": "boolean"
+	            }
+            }
+        },
+        "equipoDeSonido": {
+            "type": "object",
+            "properties": {
+            	"id": {
+	                "description": "El identificador único del activador",
+	                "type": "string"
+	            },
+	            "cuarto": {
+	            	"description": "El identificador del cuarto donde se encuentra el activador",
+	                "type": "number",
+	                "minimum": 0,
+	                "exclusiveMinimum": true
+	            },
+	            "tipo": {
+	            	"description": "Indica el tipo del activador.",
+	            	"enum": [ "equipoDeSonido" ]
+	            },
+	            "encendido": {
+	            	"description": "Indica si se encuentra en funcionamiento.",
+	                "type": "boolean"
+	            },
+	            "volumen": {
+	            	"description": "Indica el nivel de volumen del equipo de sonido.",
+	                "type": "integer"
+	            }
+            }
+        }
+    }
+}

@@ -1,0 +1,178 @@
+{
+    "id": "Casa de Bogotá",
+	"pisos": [
+		{
+		   "id": 1,
+	       "cuartos": [
+			   {
+				   "id": 1,
+			       "nombre": "Cuarto de Nicolás",
+			       "tipo": "Alcohoba"
+		        },
+		        {
+				   "id": 2,
+			       "nombre": "Comedor",
+			       "tipo": "Alcohoba"
+		        }
+		   ]
+		},
+		{
+		   "id": 2,
+	       "cuartos": [
+			   {
+				   "id": 3,
+			       "nombre": "Cuarto de Nathalia",
+			       "tipo": "Alcohoba"
+		        },
+		        {
+				   "id": 4,
+			       "nombre": "Baño Principal",
+			       "tipo": "Baño"
+		        },
+				{
+				   "id": 6,
+			       "nombre": "Estudio",
+			       "tipo": "Estudio"
+		        }
+		   ]
+		},
+		{
+		   "id": 3,
+	       "cuartos": [
+			   {
+				   "id": 5,
+			       "nombre": "Cuarto de Alejandro",
+			       "tipo": "Alcohoba"
+		        }
+		   ]
+		}
+    ],
+	"sensores": [
+    	{
+            "id": "Termo1",
+            "cuarto": 1,
+			"tipo": "termostato",
+            "encendido": false,
+            "temperatura": 27
+        },
+        {
+        	"id": "Termo2",
+            "cuarto": 3,
+			"tipo": "termostato",
+            "encendido": true,
+            "temperatura": 25
+        },
+        {
+            "id": "Sensor Humo 1",
+            "cuarto": 2,
+			"tipo": "sensorHumo",
+            "encendido": true,
+            "alarmando": true
+        },
+        {
+            "id": "Sensor Movimiento 1",
+            "cuarto": 4,
+			"tipo": "sensorMovimiento",
+            "encendido": true,
+            "alarmando": true
+        }
+    ],
+    "activadores": [
+    	{
+            "id": "Panel Codigo 1",
+            "cuarto": 2,
+            "tipo": "accesoCodigo",
+            "cuartoAdyacente": 0,
+            "codigoAcceso": "1352",
+			"bloqueado": true
+        },
+        {
+        	"id": "Panel Huella 1",
+            "cuarto": 2,
+            "tipo": "accesoHuella",
+            "cuartoAdyacente": 1,
+            "bloqueado": false
+        },
+        {
+            "id": "Lampara Nicolás",
+            "cuarto": 1,
+            "tipo": "lampara",
+            "encendido": true,
+			"intensidad": 5
+        },
+        {
+            "id": "Bombillo Nicolás",
+            "cuarto": 1,
+            "tipo": "bombillo",
+            "encendido": false,
+			"intensidad": 0
+        },
+        {
+            "id": "Bombillo Nathalia",
+            "cuarto": 3,
+            "tipo": "bombillo",
+            "encendido": true,
+			"intensidad": 5
+        },
+        {
+            "id": "Ventilador Nathalia",
+            "cuarto": 3,
+            "tipo": "ventilador",
+            "encendido": true,
+            "velocidad": 5
+        },
+		{
+            "id": "Ventilador Bano",
+            "cuarto": 4,
+            "tipo": "ventilador",
+            "encendido": false,
+            "velocidad": 5
+        },
+        {
+            "id": "Ventana Nathalia",
+            "cuarto": 3,
+            "tipo": "ventana",
+            "abierta": true,
+            "bloqueado": false
+        },
+		{
+            "id": "Ventana Bano",
+            "cuarto": 4,
+            "tipo": "ventana",
+            "abierta": false,
+            "bloqueado": true
+        },
+        {
+            "id": "TV Nicolás",
+            "cuarto": 1,
+            "tipo": "televisor",
+            "encendido": true
+        },
+        {
+            "id": "TV Nathalia",
+            "cuarto": 3,
+            "tipo": "televisor",
+            "encendido": false
+        },
+        {
+            "id": "Sonido Comedor",
+            "cuarto": 2,
+            "tipo": "equipoDeSonido",
+            "encendido": true,
+            "volumen": 25
+        },
+		{
+            "id": "Sonido Estudio",
+            "cuarto": 6,
+            "tipo": "equipoDeSonido",
+            "encendido": true,
+            "volumen": 5
+        },
+		{
+            "id": "TV Alejandro",
+            "cuarto": 5,
+            "tipo": "televisor",
+            "encendido": true
+        }
+    ]
+}
